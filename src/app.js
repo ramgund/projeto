@@ -34,7 +34,29 @@ app.post("/clientes", (req, res) => {
 
 
 
+// consultar cliente pelo id 
 
+app.get("/clientes/:id", (req, res) => {
+    const index = consultarId(req.params.id);
+    res.status(200).json(clientes[index])
+});
+
+// atualizar cadastro 
+
+app.put("/clientes/:id", (req, res) => {
+    const index = consultarId(req.params.id);
+clientes[index].nome = req.body.nome;
+res.status(200).json(clientes)
+})
+
+// excluir cliente 
+
+app.delete("/clientes/:id", (req, res) => {
+    const index = consultarId(req.params.id);    
+  clientes.splice(index, 1);
+  res.status(200).send("Cadastro excluido com sucesso!")
+
+})
 
 
 
